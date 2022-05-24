@@ -6,7 +6,7 @@ namespace Snake
 {
     struct Highscoredata
     {
-        public int Highscore { get; set; }
+        public int highscore { get; set; }
         public string playername { get; set; }
     }
     internal class Highscore
