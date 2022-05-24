@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace game
+namespace Snake
 {
     struct Highscoredata
     {
