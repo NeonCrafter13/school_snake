@@ -7,7 +7,8 @@ namespace Snake
         static void Main(string[] args)
         {
             Menu menu = new Menu();
-            menu.start();
+            menu.input(true);
+            // menu.start();
         }
     }
 }

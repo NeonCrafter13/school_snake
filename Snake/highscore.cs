@@ -25,9 +25,9 @@ namespace Snake
         {
             listhighscores.Add(score);
         }
-        public void sort(List<Highscoredata> list)
+        public void sort()
         {
-            list = listhighscores;
+            List<Highscoredata> list = listhighscores;
             int a = 0;
             while (a < list.Count)
             {
@@ -68,7 +68,7 @@ namespace Snake
         }
         public void bestscores()
         {
-            using (StreamWriter sw = new StreamWriter("scores.txt", false))
+            using (StreamWriter sw = new StreamWriter("scores.txt", true))
             {
                 for (int x = 0; x < 5; x++)
                 {
