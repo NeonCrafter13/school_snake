@@ -54,8 +54,9 @@ namespace Snake
 
         public void draw()
         {
+            Console.ForegroundColor = fruitcolour;
             Console.SetCursorPosition(position.posx, position.posy);
-            Console.WriteLine("=");
+            Console.WriteLine(shape);
         }
 
     }

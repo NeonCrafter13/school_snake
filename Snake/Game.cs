@@ -13,14 +13,15 @@ namespace Snake
         private Grid grid;
         private Menu menu;
         private bool running;
-
+        private int speed;
         public Game(Menu _menu)
         {
             menu = _menu;
             snake = new Snake(ConsoleColor.DarkRed);
-            grid = new Grid(25, 25, ConsoleColor.Green);
-            fruit = new Fruit(1, 7, 7);
+            grid = new Grid(50, 25, ConsoleColor.Green);
+            fruit = new Fruit(0, 7, 7);
             score = 0;
+            speed = 1;
         }
 
         public void run()
@@ -28,15 +29,16 @@ namespace Snake
             running = true;
             while(running)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(300 / speed);
                 game_loop();
             }
         }
         public void reset()
         {
             snake = new Snake(ConsoleColor.DarkRed);
-            grid = new Grid(25, 25, ConsoleColor.Green);
+            grid = new Grid(50, 25, ConsoleColor.Green);
             score = 0;
+            speed = 1;
         }
 
         void game_loop()
@@ -55,6 +57,14 @@ namespace Snake
             {
                 snake.add_segments();
                 score++;
+                if (fruit.Get_type() == 1 )
+                {
+                    speed = 2;
+                }
+                else
+                {
+                    speed = 1;
+                }
                 spawn_fruit();
             }
             
@@ -68,7 +78,7 @@ namespace Snake
                 end();
                 return;
             }
-            if (snake.segments[0].posx == 25)
+            if (snake.segments[0].posx == 50)
             {
                 end();
                 return;
@@ -98,7 +108,8 @@ namespace Snake
         
         void spawn_fruit()
         {
-            fruit.position = new Vector2d(7, 5); // Random position where there is no snake element
+            Random rnd = new Random();
+            fruit = new Fruit(rnd.Next(3), rnd.Next(2, 49), rnd.Next(2, 24));
         }
         
 
