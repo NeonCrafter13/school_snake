@@ -8,7 +8,7 @@ namespace Snake
     class Game
     {
         private Snake snake;
-        // private Fruit fruit;
+        private Fruit fruit;
         private int score;
         private Grid grid;
         private Menu menu;
@@ -19,6 +19,7 @@ namespace Snake
             menu = _menu;
             snake = new Snake(ConsoleColor.DarkRed);
             grid = new Grid(25, 25, ConsoleColor.Green);
+            fruit = new Fruit(1, 7, 7);
             score = 0;
         }
 
@@ -41,14 +42,7 @@ namespace Snake
         void game_loop()
         {
             snake.move();
-            /*
-            if (snake.segments[0].IsTheSame(fruit.postion))
-            {
-                snake.add_segments();
-                score++;
-                spawn_fruit();
-            }
-            */
+            
             for (int i = 1; i<snake.segments.Count; i++)
             {
                 if (snake.segments[0].IsTheSame(snake.segments[i]))
@@ -57,6 +51,13 @@ namespace Snake
                     return;
                 }
             }
+            if (snake.segments[0].IsTheSame(fruit.position))
+            {
+                snake.add_segments();
+                score++;
+                spawn_fruit();
+            }
+            
             if (snake.segments[0].posx == 0)
             {
                 end();
@@ -67,12 +68,12 @@ namespace Snake
                 end();
                 return;
             }
-            if (snake.segments[0].posx == 16)
+            if (snake.segments[0].posx == 25)
             {
                 end();
                 return;
             }
-            if (snake.segments[0].posy == 16)
+            if (snake.segments[0].posy == 25)
             {
                 end();
                 return;
@@ -83,9 +84,9 @@ namespace Snake
         void print()
         {
             Console.Clear();
-            snake.draw_segments();
-            // fruit.draw();
+            fruit.draw();
             grid.draw();
+            snake.draw_segments();
         }
 
         void end()
@@ -94,12 +95,12 @@ namespace Snake
             menu.end(score);
         }
 
-        /*
+        
         void spawn_fruit()
         {
-            fruit.position = ; // Random position where there is no snake element
+            fruit.position = new Vector2d(7, 5); // Random position where there is no snake element
         }
-        */
+        
 
     }
 }

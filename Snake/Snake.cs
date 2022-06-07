@@ -27,9 +27,10 @@ namespace Snake
         public Snake(ConsoleColor _color)
         {
             snakecolor = _color;
-            segments = new List<Vector2d> {
-                new Vector2d(5, 5)
-            };
+            segments = new List<Vector2d>();
+            segments.Add(new Vector2d(5, 5));
+            segments.Add(new Vector2d(5, 6));
+
             direction = Direction.Down;
             shape = "#";
         }
@@ -45,8 +46,7 @@ namespace Snake
         {
             for (int i = segments.Count; i > 1; i--)
             {
-                segments[i - 1] = segments[i - 2];
-
+                segments[i - 1] = new Vector2d(segments[i - 2].posx, segments[i - 2].posy);
             }
         }
         public void add_segments()
@@ -56,6 +56,7 @@ namespace Snake
 
         public void move()
         {
+            move_segments();
             if (Console.KeyAvailable) {
                 var command = Console.ReadKey().Key;
                 switch (command)
@@ -93,7 +94,6 @@ namespace Snake
                     break;
             }
 
-            move_segments();
         }
         public void draw_segments()
         {

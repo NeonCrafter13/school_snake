@@ -10,7 +10,7 @@ namespace Snake
         public string shape;
         public ConsoleColor fruitcolour;
 
-        private Vector2d position;
+        public Vector2d position;
 
         public Fruit(int Typ, int _x, int _y)
         {
@@ -50,6 +50,12 @@ namespace Snake
         public ConsoleColor Get_fruitcolour()
         {
             return fruitcolour;
+        }
+
+        public void draw()
+        {
+            Console.SetCursorPosition(position.posx, position.posy);
+            Console.WriteLine("=");
         }
 
     }
