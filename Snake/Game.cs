@@ -29,7 +29,7 @@ namespace Snake
             running = true;
             while(running)
             {
-                Thread.Sleep(300 / speed);
+                Thread.Sleep(150 / speed);
                 game_loop();
             }
         }
@@ -97,12 +97,15 @@ namespace Snake
             fruit.draw();
             grid.draw();
             snake.draw_segments();
+            Console.SetCursorPosition(60, 10);
+            Console.WriteLine("Current Score: "+ score);
         }
 
         void end()
         {
+            string name = menu.current_player;
             running = false;
-            menu.end(score);
+            menu.end(score, name);
         }
 
         

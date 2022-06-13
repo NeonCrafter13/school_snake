@@ -48,53 +48,71 @@ namespace Snake
         }
         public void txttolisthighscores()
         {
-            StreamReader sw = new StreamReader("scores.txt");
-            string temp = sw.ReadToEnd();
-            string[] array = temp.Split(",");
-            List<Highscoredata> list = new List<Highscoredata>();
-            int a = 0;
-            int b = 1;
-            for (int x = 0; x < array.Length / 2; x++)
+            if (!File.Exists("scores.txt"))
             {
-                Highscoredata c = new Highscoredata();
-                c.name = array[a];
-                c.score = Convert.ToInt32(array[b]);
-                a = a + 2;
-                b = b + 2;
-                list.Add(c);
+                using (StreamWriter sw = new StreamWriter("scores.txt"))
+                {
+                    //nur um datei zu erstellen
+                }
             }
-            listhighscores = list;
-            sw.Close();
+            using (StreamReader sr = new StreamReader("scores.txt"))
+            {
+                string temp = sr.ReadToEnd();
+                string[] array = temp.Split(",");
+                List<Highscoredata> list = new List<Highscoredata>();
+                int a = 0;
+                int b = 1;
+                {
+                    for (int x = 0; x < array.Length / 2; x++)
+                    {
+                        Highscoredata c = new Highscoredata();
+                        c.name = array[a];
+                        c.score = Convert.ToInt32(array[b]);
+                        a = a + 2;
+                        b = b + 2;
+                        list.Add(c);
+                    }
+                    listhighscores = list;
+                }               
+            }        
         }
         public void bestscores()
         {
-            using (StreamWriter sw = new StreamWriter("scores.txt", true))
+            if (listhighscores.Count > 0)
             {
-                for (int x = 0; x < 5; x++)
+                using (StreamWriter sw = new StreamWriter("scores.txt", false))
                 {
-                    if (x < listhighscores.Count)
+                    for (int x = 0; x < 5; x++)
                     {
-                        sw.Write(listhighscores[x].name + "," + listhighscores[x].score + ",");
+                        if (x < listhighscores.Count)
+                        {
+                            sw.Write(listhighscores[x].name + "," + listhighscores[x].score + ",");
+                        }
                     }
                 }
-            }
+            }     
         }
         public void print()
         {
-            StreamReader sw = new StreamReader("scores.txt");
-            string temp = sw.ReadToEnd();
-            string[] array = temp.Split(",");
-            int a = 0;
-            int b = 1;
-            int c = 0;
-            for (int x = 1; x < array.Length / 2; x++)
+            if (listhighscores.Count > 0)
             {
-                c = x;
-                Console.WriteLine(x + ". " + array[a] + " Score: " + array[b]);
-                a = a + 2;
-                b = b + 2;
-            }
-            Console.WriteLine(c + 1 + ". " + array[a] + " Score: " + array[b]);
+                using (StreamReader sw = new StreamReader("scores.txt"))
+                {
+                    string temp = sw.ReadToEnd();
+                    string[] array = temp.Split(",");
+                    int a = 0;
+                    int b = 1;
+                    int c = 0;
+                    for (int x = 1; x < array.Length / 2; x++)
+                    {
+                        c = x;
+                        Console.WriteLine(x + ". " + array[a] + " Score: " + array[b]);
+                        a = a + 2;
+                        b = b + 2;
+                    }
+                    Console.WriteLine(c + 1 + ". " + array[a] + " Score: " + array[b]);
+                }
+            }       
         }
     }
 }

@@ -5,28 +5,35 @@ namespace Snake {
     class Menu {
         private Game game;
         private Highscore highscore;
-        private string current_player;
+        public string current_player { get; set; } 
 
         public Menu()
         {
             game = new Game(this);
             List<Highscoredata> a = new List<Highscoredata>();
             highscore = new Highscore(a);
+            highscore.txttolisthighscores();
         }
 
         public void start()
         {
+            Console.WriteLine("Name: ");
+            string name = Console.ReadLine();
+            if(name == "")
+            {
+                name = "Unknown Player";
+            }
+            current_player = name;           
             game.run();
         }
-        public void end(int score)
+        public void end(int score, string name)
         {
             Highscoredata highscoredata = new Highscoredata();
             highscoredata.score = score;
-            highscoredata.name = "TEST";
+            highscoredata.name = name;
             highscore.add_score(highscoredata);
-            highscore.bestscores();
-            highscore.txttolisthighscores();
             highscore.sort();
+            highscore.bestscores();
             game.reset();
             input(true);
         }
