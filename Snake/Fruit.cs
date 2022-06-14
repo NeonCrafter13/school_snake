@@ -7,10 +7,10 @@ namespace Snake
     class Fruit
     {
         private int type;
-        public string shape;
-        public ConsoleColor fruitcolour;
+        private string shape;
+        private ConsoleColor fruitcolour;
 
-        public Vector2d position;
+        public Vector2d position{get; set;}
 
         public Fruit(int Typ, int _x, int _y)
         {

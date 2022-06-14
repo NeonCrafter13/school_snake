@@ -5,7 +5,7 @@ namespace Snake {
     class Menu {
         private Game game;
         private Highscore highscore;
-        public string current_player { get; set; } 
+        private string current_player; 
 
         public Menu()
         {
@@ -15,7 +15,7 @@ namespace Snake {
             highscore.txttolisthighscores();
         }
 
-        public void start()
+        private void start()
         {
             Console.WriteLine("Name: ");
             string name = Console.ReadLine();
@@ -26,11 +26,11 @@ namespace Snake {
             current_player = name;           
             game.run();
         }
-        public void end(int score, string name)
+        public void end(int score)
         {
             Highscoredata highscoredata = new Highscoredata();
             highscoredata.score = score;
-            highscoredata.name = name;
+            highscoredata.name = current_player;
             highscore.add_score(highscoredata);
             highscore.sort();
             highscore.bestscores();
@@ -74,7 +74,7 @@ namespace Snake {
 
         }
 
-        public void print(bool select)
+        private void print(bool select)
         {
             Console.WriteLine(@"
  ____              _

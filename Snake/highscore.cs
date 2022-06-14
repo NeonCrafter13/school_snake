@@ -13,7 +13,7 @@ namespace Snake
         public int score { get; set; }
         public string name { get; set; }
     }
-    internal class Highscore
+    class Highscore
     {
         public List<Highscoredata> listhighscores { get; set; }
 

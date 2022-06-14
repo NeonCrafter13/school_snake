@@ -36,13 +36,13 @@ namespace Snake
         }
 
 
-        public void draw(int x, int y)
+        void draw(int x, int y)
         {
             Console.ForegroundColor = snakecolor;
             Console.SetCursorPosition(x, y);
             Console.WriteLine(shape);
         }
-        public void move_segments()
+        void move_segments()
         {
             for (int i = segments.Count; i > 1; i--)
             {

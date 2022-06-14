@@ -103,9 +103,8 @@ namespace Snake
 
         void end()
         {
-            string name = menu.current_player;
             running = false;
-            menu.end(score, name);
+            menu.end(score);
         }
 
         
